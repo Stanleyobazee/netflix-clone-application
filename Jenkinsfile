@@ -15,7 +15,7 @@ pipeline{
         }
         stage('Checkout from Git'){
             steps{
-                git branch: 'main', url: 'https://github.com/johntoby/netflix-clone-application.git'
+                git branch: 'main', url: 'https://github.com/Stanleyobazee/netflix-clone-application.gitt'
             }
         }
         stage("Sonarqube Analysis "){
@@ -42,8 +42,8 @@ pipeline{
             steps{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                       sh "docker build --build-arg TMDB_V3_API_KEY=db9ee4907cb9f2eb985252f811b81d05 -t johntoby/netflix:${BUILD_NUMBER} ."
-                       sh "docker push johntoby/netflix:${BUILD_NUMBER} "
+                       sh "docker build --build-arg TMDB_V3_API_KEY=44bebaad0ac658671d1e448e13f2bb29 -t stanley80/netflix:${BUILD_NUMBER} ."
+                       sh "docker push stanley80/netflix:${BUILD_NUMBER} "
                     }
                 }
             }
@@ -63,7 +63,7 @@ pipeline{
 
     post {
      always {
-        emailext attachLog: true,
+        emailext attachLog: false,
             subject: "'${currentBuild.result}'",
             body: "Project: ${env.JOB_NAME}<br/>" +
                 "Build Number: ${env.BUILD_NUMBER}<br/>" +
