@@ -51,12 +51,12 @@ pipeline{
         stage('Deploy to container'){
             steps{
                 sh 'docker rm -f netflix || true' // Ensures the old container is removed if exists
-                sh 'docker run -d --name netflix -p 8081:80 johntoby/netflix:${BUILD_NUMBER}'
+                sh 'docker run -d --name netflix -p 8081:80 stanley80/netflix:${BUILD_NUMBER}'
             }
         } 
         stage("TRIVY"){
             steps{
-                sh "trivy image johntoby/netflix:${BUILD_NUMBER} > trivyimage.txt"
+                sh "trivy image stanley80/netflix:${BUILD_NUMBER} > trivyimage.txt"
             }
         }
     }
